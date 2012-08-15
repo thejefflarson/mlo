@@ -38,7 +38,7 @@ class LM {
 
   void AddSentence(std::string& sentence);
   Level[] levels_;
-  std::map<std::string, uint64_t> unigram_table;
+  Level unigram_table_;
 
   int grams_;
 };

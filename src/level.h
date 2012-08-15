@@ -10,11 +10,24 @@ namespace MLO {
 // contexts
 class Level {
  public:
-  Level() : gramz_() {};
+  Level();
   ~Level();
 
-  void Add(uint64_t word, uint64_t context) {
-    gramz_[word][context] = gramz_[word][context]++;
+  uint64_t Add(unsigned int word, unsigned int context) {
+    uint64_t encoded = ((uint64_t)context << 34) + word; // ha!
+    uint64_t index;
+
+    if(gramz_.count(it) == 0) {
+      counts.push_back(0);
+      index = counts.size();
+      gramz_[encoded] = index;
+    } else {
+      index = gramz_[encoded];
+    }
+
+    counts[index]++;
+
+    return index; // generate next context_id
   };
 
   uint64_t getCount(uint64_t word, uint64_t context) {
@@ -25,9 +38,9 @@ class Level {
   Level(const Level&);
   void operator=(const Level&);
 
-
-  typedef std::map<uint64_t, uint64_t> Record;
-  std::map<uint64_t, Record> gramz_;
+  std::vector<uint64_t> counts;
+  std::map<uint64_t, uint64_t> gramz_;
+// context_encoding, count_index
 };
 
 }
