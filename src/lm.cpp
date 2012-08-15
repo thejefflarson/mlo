@@ -42,7 +42,7 @@ void LM::AddSentence(const std::string& sentence){
 
     // Unigrams which are first up have a context id of zero
     uint64_t context_id = 0;
-    for(int j = i; j < backtrack; j++){
+    for(int j = backtrack; j >= i; j--){
       context_id = levels_[j].Add(unigram_id, context_id);
     }
   }
