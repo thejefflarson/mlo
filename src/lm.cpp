@@ -1,5 +1,6 @@
 #include "lm.h"
 #include <vector>
+#include <fstream>
 
 namespace mlo {
 
@@ -52,7 +53,7 @@ void LM::AddSentence(const std::string& sentence){
 };
 
 Status LM::Load(const std::string& filename){
-  ifstream ifile(filename);
+  std::ifstream ifile(filename);
 
   if(ifile.fail()) return Status.IoError();
 

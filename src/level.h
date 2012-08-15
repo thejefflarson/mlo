@@ -1,5 +1,6 @@
 #include <sys/types.h>
 #include <map>
+#include <vector>
 
 #ifndef MLO_LEVEL_H
 #define MLO_LEVEL_H
@@ -13,11 +14,12 @@ class Level {
   Level();
   ~Level();
 
+  // TODO: move method definitions to level.cpp
   uint64_t Add(unsigned int word, unsigned int context) {
-    uint64_t encoded = ((uint64_t)context << 34) + word; // ha!
+    uint64_t encoded = encode(word, context);
     uint64_t index;
 
-    if(gramz_.count(it) == 0) {
+    if(gramz_.count(encoded) == 0) {
       counts.push_back(0);
       index = counts.size();
       gramz_[encoded] = index;
@@ -27,11 +29,11 @@ class Level {
 
     counts[index]++;
 
-    return index; // generate next context_id
+    return index; // return this context_id
   };
 
   uint64_t getCount(uint64_t word, uint64_t context) {
-    return gramz_[word][context];
+    return gramz_[encode(word, context)];
   };
 
  private:
@@ -41,6 +43,10 @@ class Level {
   std::vector<uint64_t> counts;
   std::map<uint64_t, uint64_t> gramz_;
 // context_encoding, count_index
+
+  uint64_t encode(unsigned int word, unsigned int context){
+    return ((uint64_t)context << 34) + word; // ha!
+  }
 };
 
 }

@@ -3,21 +3,22 @@
 
 namespace falconer {
 
+// TODO: move impl to status.cpp
 class Status {
  public:
-  Status() : code_(kOk) {};
+  Status() : code_(kOk) {}
   ~Status();
 
-  static Status IoError() { return Status(IoError); }
+  Status(const Status& s) { code_ = s.code_; }
+  void operator=(const Status& s) { code_ = s.code_; }
+
+  static Status IoError() { return Status(kIoError); }
   static Status Ok() { return Status(); }
 
   bool ok() { return code_ == kOk; }
   bool IsNotFound() { return code_ == kIoError; }
 
  private:
-  void operator=(const Status&);
-  Status(const Status&);
-
   enum Code {
     kOk,
     kIoError
@@ -25,7 +26,7 @@ class Status {
 
   Code code_;
 
-  Status(Code code) : code_(code) {};
+  Status(Code code) : code_(code) {}
 };
 
 }
