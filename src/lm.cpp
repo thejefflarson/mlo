@@ -4,15 +4,11 @@
 
 namespace mlo {
 
-LM::LM(int grams) {
-  // subtract one for the unigram table
-  grams_    = grams - 1;
-  levels_   = new Level[grams_];
-};
+LM::LM(int grams) :
+  grams_(grams),
+  levels_(new Level[grams_]) { }
 
-LM::~LM(){
-  delete[] levels_;
-};
+LM::~LM(){ delete[] levels_; }
 
 
 // TODO: both of the following should be in a builder class.
@@ -35,38 +31,42 @@ void LM::AddSentence(const std::string& sentence){
 
   // push into levels
   for(it = tokens.begin(); it < tokens.end(); it++, i++) {
-    // set unigram
-    if(unigram_table_.count(it) == 0)
-      unigram_table_[it] = unigram_table_.length();
+    // set unigrams
+    if(unigram_table_.count(*it) == 0)
+      unigram_table_[*it] = unigram_table_.size();
 
-    int64t_t unigram_id = unigram_table_[it];
+    int64_t unigram_id = unigram_table_[*it];
 
     // Insert i to i - grams_ into the levels.
     int backtrack = i - grams_ > 0 ? i - grams_ : 0;
-    uint64_t context_id = unigram_id;
+
+    // Unigrams which are first up have a context id of zero
+    uint64_t context_id = 0;
     for(int j = i; j < backtrack; j++){
-      context_id = levels_[j].add(it, context_id);
+      context_id = levels_[j].Add(unigram_id, context_id);
     }
   }
-
-  return Status.ok();
-};
+}
 
 Status LM::Load(const std::string& filename){
-  std::ifstream ifile(filename);
+  std::ifstream ifile;
+  ifile.open(filename.c_str());
 
-  if(ifile.fail()) return Status.IoError();
+  if(ifile.fail()) return Status::IOError();
 
-  while(ifile.good())
-    AddSentence(ifile.getline());
+  while(ifile.good()) {
+    std::string line;
+    getline(ifile, line);
+    AddSentence(line);
+  }
 
-  ifs.close();
+  ifile.close();
 
-  return Status.ok();
-};
+  return Status::Ok();
+}
 
 void query(const std::string& sentence){
 
-};
+}
 
 }

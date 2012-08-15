@@ -1,0 +1,1 @@
+lm: src/lm.o

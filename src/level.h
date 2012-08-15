@@ -5,7 +5,7 @@
 #ifndef MLO_LEVEL_H
 #define MLO_LEVEL_H
 
-namespace MLO {
+namespace mlo {
 
 // A level stores word values and (software) pointers to associated higher level
 // contexts
@@ -20,27 +20,27 @@ class Level {
     uint64_t index;
 
     if(gramz_.count(encoded) == 0) {
-      counts.push_back(0);
-      index = counts.size();
+      counts_.push_back(0);
+      index = counts_.size();
       gramz_[encoded] = index;
     } else {
       index = gramz_[encoded];
     }
 
-    counts[index]++;
+    counts_[index]++;
 
     return index; // return this context_id
   };
 
-  uint64_t getCount(uint64_t word, uint64_t context) {
-    return gramz_[encode(word, context)];
+  uint64_t count(uint64_t word, uint64_t context) {
+    return gramz_.count(encode(word, context));
   };
 
  private:
   Level(const Level&);
   void operator=(const Level&);
 
-  std::vector<uint64_t> counts;
+  std::vector<uint64_t> counts_;
   std::map<uint64_t, uint64_t> gramz_;
 // context_encoding, count_index
 
