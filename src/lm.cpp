@@ -4,8 +4,8 @@
 namespace mlo {
 
 LM::LM(int grams) {
-  levels_ = new Level[grams];
-  grams_  = grams;
+  grams_  = grams - 1;
+  levels_ = new Level[grams_];
 };
 
 LM::~LM(){
@@ -31,7 +31,8 @@ void LM::AddSentence(const std::string& sentence){
 
   // push into levels
   for(it = tokens.begin(); it < tokens.end(); it++, i++) {
-    int iterations = grams;
+    int iterations = grams_;
+
   }
 
   return Status.ok();

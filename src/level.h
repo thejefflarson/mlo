@@ -13,11 +13,11 @@ class Level {
   Level() : gramz_() {};
   ~Level();
 
-  void Add(int64_t word, int64_t context) {
+  void Add(uint64_t word, uint64_t context) {
     gramz_[word][context] = gramz_[word][context]++;
   };
 
-  int64_t getCount(int64_t word, int64_t context) {
+  uint64_t getCount(uint64_t word, uint64_t context) {
     return gramz_[word][context];
   };
 
@@ -26,8 +26,8 @@ class Level {
   void operator=(const Level&);
 
 
-  typedef std::map<int64_t, int64_t> Record;
-  std::map<int64_t, Record> gramz_;
+  typedef std::map<uint64_t, uint64_t> Record;
+  std::map<uint64_t, Record> gramz_;
 };
 
 }

@@ -19,6 +19,7 @@
 #include "level.h"
 #include "status.h"
 #include <string>
+#include <map>
 #include <fstream>
 
 namespace mlo {
@@ -37,6 +38,8 @@ class LM {
 
   void AddSentence(std::string& sentence);
   Level[] levels_;
+  std::map<std::string, uint64_t> unigram_table;
+
   int grams_;
 };
 
