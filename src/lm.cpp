@@ -1,12 +1,14 @@
 #include "lm.h"
 #include <vector>
 #include <fstream>
+#include <string>
 
 namespace mlo {
 
 LM::LM(int grams) :
   grams_(grams),
-  levels_(new Level[grams_]) { }
+  levels_(new Level[grams_]),
+  unigram_table_() { }
 
 LM::~LM(){ delete[] levels_; }
 
@@ -16,8 +18,8 @@ void LM::AddSentence(const std::string& sentence){
   int offset, noffset = 0, i = 0;
 
   // split into tokens
-  while((offset = sentence.find_first_of(" ", offset)) != std::string::npos){
-    noffset = sentence.find_first_of(" ", offset);
+  while((offset = sentence.find(" ", offset)) != std::string::npos){
+    noffset = sentence.find(" ", offset);
 
     // We're at the last token
     if(noffset == std::string::npos) noffset = sentence.length();

@@ -11,8 +11,8 @@ namespace mlo {
 // contexts.
 class Level {
  public:
-  Level();
-  ~Level();
+  Level() : counts_(), gramz_() { };
+  ~Level() { };
 
   // TODO: move method definitions to level.cpp
   uint64_t Add(unsigned int word, unsigned int context);

@@ -36,11 +36,11 @@ class LM {
   void operator=(const LM&);
 
   void AddSentence(const std::string& sentence);
+  int grams_;
   Level *levels_;
   // Look up table to keep track of unigram ids
   std::map<std::string, int64_t> unigram_table_;
 
-  int grams_;
 };
 
 }
