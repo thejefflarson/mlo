@@ -33,7 +33,7 @@ class Level {
   };
 
   uint64_t count(uint64_t word, uint64_t context) {
-    return gramz_.count(encode(word, context));
+    return counts_[gramz_[encode(word, context)]];
   };
 
  private:
