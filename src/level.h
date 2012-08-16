@@ -20,8 +20,8 @@ class Level {
     uint64_t index;
 
     if(gramz_.count(encoded) == 0) {
-      counts_.push_back(0);
       index = counts_.size();
+      counts_.push_back(0);
       gramz_[encoded] = index;
     } else {
       index = gramz_[encoded];
