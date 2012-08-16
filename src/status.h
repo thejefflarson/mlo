@@ -3,7 +3,6 @@
 
 namespace mlo {
 
-// TODO: move impl to status.cpp
 class Status {
  public:
   Status() : code_(kOk) { }

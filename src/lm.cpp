@@ -10,7 +10,6 @@ LM::LM(int grams) :
 
 LM::~LM(){ delete[] levels_; }
 
-
 // TODO: both of the following should be in a builder class.
 void LM::AddSentence(const std::string& sentence){
   std::vector<std::string> tokens;
@@ -65,7 +64,7 @@ Status LM::Load(const std::string& filename){
   return Status::Ok();
 }
 
-void query(const std::string& sentence){
+void LM::query(const std::string& sentence){
 
 }
 
