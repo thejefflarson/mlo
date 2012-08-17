@@ -6,7 +6,7 @@
 int main(void){
   mlo::LM lm(5);
   std::cout << "Getting file." << std::endl;
-  mlo::Status status = lm.Load("/Users/jlarson/dev/lm/t.tok");
+  mlo::Status status = lm.Load("test.tok");
   if(status.IsIOError())
     std::cout << "Couldn't open file!" << std::endl;
 
