@@ -41,6 +41,8 @@ class LM {
   // Look up table to keep track of unigram ids
   std::map<std::string, int64_t> unigram_table_;
 
+  typedef std::vector<std::string> Tokens;
+  Tokens tokenize(const std::string& sentence);
 };
 
 }

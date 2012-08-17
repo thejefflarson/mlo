@@ -10,6 +10,8 @@ weighting.
 Stores the ngrams in successive levels, in last-rest order, because querying
 will be easier.
 
+Style note: Functions that change internal state are capitalized.
+
   It is useless to observe that the best volume of the many hexagons under my
   administration is entitled The Combed Thunderclap and another The Plaster
   Cramp and another Axaxaxas mlö.

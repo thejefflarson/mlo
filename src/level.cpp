@@ -1,18 +1,17 @@
 #include "level.h"
 
-
 namespace mlo {
 
 uint64_t Level::Add(unsigned int word, unsigned int context) {
   uint64_t encoded = encode(word, context);
   uint64_t index;
 
-  if(gramz_.count(encoded) == 0) {
+  if(grams_.count(encoded) == 0) {
     index = counts_.size();
     counts_.push_back(0);
-    gramz_[encoded] = index;
+    grams_[encoded] = index;
   } else {
-    index = gramz_[encoded];
+    index = grams_[encoded];
   }
 
   counts_[index]++;
@@ -21,11 +20,11 @@ uint64_t Level::Add(unsigned int word, unsigned int context) {
 }
 
 uint64_t Level::count(uint64_t word, uint64_t context) {
-  return counts_[gramz_[encode(word, context)]];
+  return counts_[grams_[encode(word, context)]];
 }
 
 uint64_t Level::encode(unsigned int word, unsigned int context) {
-  return ((uint64_t)context << 34) + word; // ha!
+  return ((uint64_t)word << 34) + context; // ha!
 }
 
 }

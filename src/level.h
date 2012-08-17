@@ -11,8 +11,8 @@ namespace mlo {
 // contexts.
 class Level {
  public:
-  Level() : counts_(), gramz_() { };
-  ~Level() { };
+  Level() : total_(0), counts_(), grams_() { }
+  ~Level() { }
 
   // TODO: move method definitions to level.cpp
   uint64_t Add(unsigned int word, unsigned int context);
@@ -22,8 +22,9 @@ class Level {
   Level(const Level&);
   void operator=(const Level&);
 
+  uint64_t total_;
   std::vector<uint64_t> counts_;
-  std::map<uint64_t, uint64_t> gramz_;
+  std::map<uint64_t, uint64_t> grams_;
 // context_encoding, count_index
 
   uint64_t encode(unsigned int word, unsigned int context);
