@@ -56,18 +56,21 @@ Status LM::Load(const std::string& filename) {
 }
 
 LM::Tokens LM::tokenize(const std::string& sentence) {
-  unsigned long offset = 0, noffset = 0;
+  unsigned long offset = 0, poffset = 0, length = sentence.length();
 
   Tokens tokens;
-    // split into tokens
-  while((offset = sentence.find(" ", offset + 1)) != std::string::npos){
-    noffset = sentence.find(" ", offset + 1);
+
+  // split into tokens
+  while(poffset < length){
+    offset = sentence.find(" ", offset + 1);
 
     // We're at the last token
-    if(noffset == std::string::npos) noffset = sentence.length();
+    if(offset == std::string::npos) offset = sentence.length();
 
-    if(noffset - offset > 0)
-      tokens.push_back(sentence.substr(offset, noffset - offset));
+    if(offset - poffset > 0)
+      tokens.push_back(sentence.substr(poffset, offset - poffset));
+
+    poffset = offset;
   }
 
   return tokens;
