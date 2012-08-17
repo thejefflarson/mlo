@@ -5,7 +5,7 @@
 
 # Compiled Dynamic libraries
 *.so
-
+test/test
 # Compiled Static libraries
 *.lai
 *.la
