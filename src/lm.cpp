@@ -15,7 +15,7 @@ LM::~LM(){ delete[] levels_; }
 // TODO: both of the following should be in a builder class.
 void LM::AddSentence(const std::string& sentence){
   std::vector<std::string> tokens;
-  unsigned long offset, noffset = 0;
+  unsigned long offset = 0, noffset = 0;
   int i = 0;
 
   // split into tokens
