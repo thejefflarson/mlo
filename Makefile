@@ -9,4 +9,9 @@ src/lm.o: src/lm.cpp src/lm.h src/level.h src/status.h
 mlo.a: $(OBJ)
 	libtool -static -o $@ $^
 
-.PHONY: all
+test: all
+	$(CXX) $(CPPFLAGS) -I$(shell pwd) -c -o test/test.o test/test.cpp
+	$(CXX) $(CPPFLAGS) -o test/test test/test.o  mlo.a
+	cd test && ./test && cd ..
+
+.PHONY: all test

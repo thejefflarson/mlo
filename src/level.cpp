@@ -1,5 +1,6 @@
 #include "level.h"
 
+
 namespace mlo {
 
 uint64_t Level::Add(unsigned int word, unsigned int context) {

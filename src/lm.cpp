@@ -19,8 +19,8 @@ void LM::AddSentence(const std::string& sentence){
   int i = 0;
 
   // split into tokens
-  while((offset = sentence.find(" ", offset)) != std::string::npos){
-    noffset = sentence.find(" ", offset);
+  while((offset = sentence.find(" ", offset + 1)) != std::string::npos){
+    noffset = sentence.find(" ", offset + 1);
 
     // We're at the last token
     if(noffset == std::string::npos) noffset = sentence.length();

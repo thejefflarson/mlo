@@ -6,7 +6,7 @@ namespace mlo {
 class Status {
  public:
   Status() : code_(kOk) { }
-  ~Status();
+  ~Status() { };
 
   Status(const Status& s) { code_ = s.code_; }
   void operator=(const Status& s) { code_ = s.code_; }
