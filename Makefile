@@ -1,5 +1,5 @@
 OBJ = src/level.o src/lm.o
-CPPFLAGS ?= -I$(shell pwd)/src/ -Wall -pedantic -Werror -std=c++11 -stdlib=libc++ -O3 -ggdb
+CPPFLAGS ?= -I$(shell pwd)/src/ -Wall -Wextra -pedantic -Werror -std=c++11 -stdlib=libc++ -O3 -ggdb
 
 all: mlo.a
 
