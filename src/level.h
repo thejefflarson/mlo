@@ -24,8 +24,9 @@ class Level {
 
   uint64_t total_;
   std::vector<uint64_t> counts_;
-  std::map<uint64_t, uint64_t> grams_;
+
 // context_encoding, count_index
+  std::map<uint64_t, uint64_t> grams_;
 
   uint64_t encode(unsigned int word, unsigned int context);
 };

@@ -87,10 +87,11 @@ void LM::query(const std::string& sentence) {
       continue;
     }
 
-    uint64_t word_id = unigram_table_[*it];
     float score = 0;
+    uint64_t context_id = 0, count = 0, word_id = unigram_table_[*it];
     for(int i = 0; i < grams_ && it + i < tokens.end(); i++) {
-      (void)word_id, (void)score;
+      context_id = levels_[grams_ - i].findContext(word_id, context_id);
+      count      = levels_[grams_ - i].count(word_id, context_id);
     }
   }
 }
