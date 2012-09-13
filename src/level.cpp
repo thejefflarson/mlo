@@ -3,8 +3,8 @@
 namespace mlo {
 
 uint64_t Level::Add(unsigned int word, unsigned int context) {
-  uint64_t encoded = encode(word, context);
-  uint64_t index;
+  uint64_t encoded = encode(word, context), index;
+
 
   if(grams_.count(encoded) == 0) {
     index = counts_.size();
