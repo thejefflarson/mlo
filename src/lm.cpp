@@ -26,15 +26,17 @@ void LM::AddSentence(const std::string& sentence) {
     if(unigram_table_.count(*it) == 0)
       unigram_table_[*it] = unigram_table_.size();
 
-    int64_t unigram_id = unigram_table_[*it];
+    uint64_t unigram_id;
 
     // Insert i to i - grams_ into the levels.
     int backtrack = i - grams_ > 0 ? i - grams_ : 0;
 
     // Unigrams which are first up have a context id of zero
     uint64_t context_id = 0;
-    for(int j = backtrack; j >= i; j--)
+    for(int j = 0; backtrack - j > backtrack - grams_ && backtrack - grams_ > 0; j++) {
+      unigram_id = unigram_table_[*(it - j)];
       context_id = levels_[j].Add(unigram_id, context_id);
+    }
   }
 }
 
@@ -65,7 +67,8 @@ LM::Tokens LM::tokenize(const std::string& sentence) {
     offset = sentence.find(" ", offset + 1);
 
     // We're at the last token
-    if(offset == std::string::npos) offset = sentence.length();
+    if(offset == std::string::npos)
+      offset = sentence.length();
 
     if(offset - poffset > 0)
       tokens.push_back(sentence.substr(poffset, offset - poffset));
@@ -87,11 +90,8 @@ void LM::query(const std::string& sentence) {
       continue;
     }
 
-    float score = 0;
-    uint64_t context_id = 0, count = 0, word_id = unigram_table_[*it];
     for(int i = 0; i < grams_ && it + i < tokens.end(); i++) {
-      context_id = levels_[grams_ - i].findContext(word_id, context_id);
-      count      = levels_[grams_ - i].count(word_id, context_id);
+     // Range range = levels_[i].getRange(word_id);
     }
   }
 }

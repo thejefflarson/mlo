@@ -14,9 +14,9 @@ class Level {
   Level() : total_(0), counts_(), grams_() { }
   ~Level() { }
 
-  // TODO: move method definitions to level.cpp
   uint64_t Add(unsigned int word, unsigned int context);
   uint64_t count(uint64_t word, uint64_t context);
+
 
  private:
   Level(const Level&);
